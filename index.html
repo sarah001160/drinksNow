@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!--匯入Vue jquery--->
+</head>
+<style>/*請獨立出一隻CSS 比較好管理*/
+    html,body{
+        width:100%;
+    }
+    table th,td{
+        width:100px;
+    }
+    table td{
+        text-align:center;
+    }
+    input[type="checkbox"]{/*中括號可以指定屬性喔*/
+        width:50px;
+        height:50px;
+    }
+    .calNum li{
+        display:inline-block;
+    }
+    td.bgred{
+        background:red;
+    }
+    .cartArea{
+        width:70%;
+    }
+    .cartArea ul{
+        margin-top:20px;
+        background:pink;
+        padding:10px;
+    }
+ 
+</style>
+<body>
+    <div id="app">
+        <h1>定飲料</h1>
+        <div class="menu">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>品項</th>
+                    <th>中杯價錢</th>
+                    <th>大杯價錢</th>
+                    <th>容量</th>
+                    <th>甜度</th>
+                    <th style="width:200px">數量</th>
+                    <th>價錢</th>
+                    <th>訂購</th>
+                </tr>
+                <tr v-for="(item,key) in List" :key=item>
+                    <td><input type="button"  value="訂購" @click="Gotocart(item)"></td>
+                    <td :class="{'bgred':item.check===true}">{{item.name}}</td>
+                    <td>{{item.Mprice}}</td>
+                    <td>{{item.Lprice}}</td>
+                    <td>
+                        <select name="" id="" @change="selection(item)" v-model="item.size">
+                            <option value=""> </option>
+                            <option value="medium">中杯</option>
+                            <option value="large">大杯</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="" id="" @change="selection(item)" v-model="item.sugar">
+                            <option value=""> </option>
+                            <option value="半糖">半糖</option>
+                            <option value="全糖">全糖</option>
+                        </select>
+                    </td>
+                    <td>{{item.number}}</td>
+                    <td>{{item.price}}</td>
+                </tr>
+               
+            </table>
+            <div class="cartArea">
+                顯示購物車
+                <ul v-for="(item,key) in showsList">
+                    <li><button @click="removeFromcart(item)">刪除</button></li>
+                    <li>飲料:{{item.title}}</li>
+                    <li>價錢:{{item.price}}</li>
+                    <li>甜度:{{item.sugar}}</li>
+                    <li>數量{{item.num}}</li>
+                </ul>
+            </div>
+           
+        
+        </div>
+
+        <div class="memo">
+            <ul>
+                <h2>代辦事項</h2>
+                <li>飲料要加上圖片</li>
+                <li>空白的飲料不能加入購物車,要選冰塊甜度的容量大小</li>
+                <li>加油!</li>
+                <li>建議試試看自製的json檔案,練習restfulapi可以去看保哥的youtube</li>
+                <li>已加入購物車的商品建議出現可編輯的按鈕,調整數量甜度冰塊使用</li>
+                <li>計算金額總額</li>
+                <li>記得響應式的網頁也要切出來唷</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                mssg:'123',
+                List:[
+                    {
+                        name:'紅茶',
+                        Mprice:20,
+                        Lprice:30,
+                        sugar:'',
+                        size:'',
+                        number:0,
+                        ice:'',
+                        check:false,
+                        price:'',
+                    },
+                    {
+                        name:'珍珠奶茶',
+                        Mprice:40,
+                        Lprice:50,
+                        sugar:'',
+                        size:'',
+                        number:0,
+                        price:'',
+                        ice:'',
+                        check:false,
+                        price:'',
+                    },
+                ],
+                cartlist:JSON.parse(localStorage.getItem('drinkslist'))||[],
+            },
+            created(){
+
+            },
+            methods:{
+                selection(item){
+                    const checkitemSize = item.size;
+                    console.log(checkitemSize);
+                    switch(checkitemSize){//善用switch
+                        case 'medium':
+                        item.price=item.Mprice;
+                        break;
+
+                        case 'large':
+                        item.price=item.Lprice;
+                        break;
+                        
+                        case '':
+                        item.price=''
+                        break;
+
+                        defulat:
+                        item.price=''
+                        break;
+                   
+                    }
+                    console.log(item)
+                    
+                },
+                Gotocart(item){
+                    //這邊要檢視那些影料有打勾勾,打勾者加入購物車陣列中
+                    //到時候再用mounted呼叫這個mehtods
+                    if(item.size===" "||item.sugar===''){return}
+                    const value= item.name;
+                    const valueSize=item.size;
+                    const valueSugar = item.sugar;
+                    const valuePrice = item.price;
+                    const timestamp = Math.floor(Date.now()/1000);
+                     const txt={
+                        id:timestamp,
+                        title:value,
+                        price:valuePrice,
+                        sugar:valueSugar
+                     }
+                    this.cartlist.push(txt);
+                    console.log(this.cartlist)
+                    localStorage.setItem('drinkslist',JSON.stringify(this.cartlist))
+                    item.size='';
+                    item.sugar='';
+                    item.price='';
+
+                    
+                },
+                removeFromcart(item){
+                    const vm = this;
+                    const Index = vm.cartlist.indexOf(item);
+                    console.log(Index)
+                    console.log(item.title)
+                    this.cartlist.splice(Index,1);
+                     localStorage.setItem('drinkslist',JSON.stringify(this.cartlist));
+
+                }
+            },
+            computed:{
+               showsList(){
+                   return this.cartlist;
+               },
+            
+               
+            
+            }
+        })
+    </script>
+    
+</body>
+</html>
