@@ -1,0 +1,251 @@
+@import "_reset.scss";
+@mixin mobile{
+    @media(max-width:576px){
+        @content
+    }
+}
+@mixin tablet{
+    @media(min-width:576.1px)and(max-width:853px){
+        @content
+    }
+}
+
+
+.butt{
+    border-radius:4px;
+   
+}
+.butt:hover{
+    color:darkred;
+}
+.f-bold{/*粗體字*/
+    font-weight:bold;
+}
+.verti-c{/*垂直置中*/
+    vertical-align: middle;//垂直置中
+}
+.horiz-c{
+    text-align:center;
+}
+.horiz-l{
+    text-align:left;
+}
+.horiz-r{
+    text-align:right;
+}
+$primaryColor:#dbc3a3;
+
+
+   
+   
+   #app{
+        width:100%;
+        height:auto;
+        font-family:Arial;
+        
+        .header{
+            display:flex;
+            margin:0px 0 100px 0;
+            padding-top:10px;
+            width:100%;
+            height:50px;
+            background:orange;
+            color:white;
+            box-shadow:2px 2px 20px black;
+            position:fixed;
+            top:0;
+            left:0;
+           @include mobile{
+               background:green;
+           }
+           @include tablet{
+               background:pink;
+           }
+         
+            h2{
+                margin:0 0 0 20px;
+                font-weight:bold;
+                font-style:italic;
+            } 
+        }
+        .header.jqtransparent{
+            height:0px;
+            padding:0;
+            margin:0;
+            transition:ease .2s;
+            h2{
+                display:none;
+            }
+        }
+        .menu{
+            margin:300px auto 300px auto;
+            width:100%;
+            .drinksCatelog{
+                padding:20px 0 20px 0;
+                margin:0 auto;
+                >div{
+                    display:inline-block;
+                    width:30%;
+                    padding:2px  5px 10px 5px;
+                    border:.5px solid white ;
+                    border-radius:10px;
+                    margin:25px 1%;
+                    min-height:300px;
+                    box-shadow:.5px 1px 3px grey;
+                    position:relative;
+                    @include mobile{
+                        /*手機板時 div請放寬*/
+                        width:90%;
+                        margin:25px 5%;
+                    }
+                    @include tablet{
+                        width:45%;
+                        margin:25px 2%;
+                    }
+                    >div{
+                        text-align:center;
+                        img{
+                            width:50%;
+                            height:200px;
+                            margin-top:0px;
+                        }
+                    }
+                    
+                    h5{
+                        margin:5px auto;
+                    }
+                    .tag{}
+                    .selection{
+                        /*background:yellow;*/
+                        
+                        label{
+                            margin-top:5px;
+                            text-align:left;
+                            
+                        }
+                        select{
+                            border:none;
+                            border-radius:2px;
+                            background:#ece0cf;
+                            width:60px;
+                            height:30px;
+                            margin:5px 5px 0 0;
+                        }
+                        #addsnack{
+                            width:170px;
+                        }
+                    }
+                }
+                button{
+                    margin-top:10px;
+                    margin-left:30px;
+                    width:50%;
+                    height:40px;
+                    background:$primaryColor;
+                   color:white;
+                    border:none;
+                    &:hover{
+                        background:#ffb01f;
+                        font-weight:bold;
+                        
+                    }
+                }
+               
+            }
+            .drinksMenu{/*table*/
+                width:90%;
+                height:auto;
+                margin:50px auto;
+                border:1px solid black;
+                background:pink;
+                th{
+                    width:8%;
+                    height:50px;
+                    border-bottom:1px solid black;
+                }
+              
+                td{
+                    width:8%;
+                    height:50px;
+                    text-align:center;
+                    border-bottom:1px solid black;
+                    text-align:left;
+                }
+                td:nth-child(1){
+                    text-align:center;
+                }
+              
+               
+            }
+        }
+        
+        input[type="checkbox"]{/*中括號可以指定屬性喔*/
+            width:50px;
+            height:50px;
+        }
+        .calNum li{
+            display:inline-block;
+        }
+      
+        .cartArea{/*加入購物車*/
+            width:100%;
+            height:auto;
+            margin:100px auto;
+            position:relative;
+           table{
+               width:70%;
+               height:60px;
+                margin:0 auto;
+                background:white;
+                height:50px;
+                border:1px solid $primaryColor;
+                @include tablet{
+                    width:90%;
+                }
+                @include mobile{
+                    width:90%;
+                }
+                tr{}
+                th{
+                    height:60px;
+                   
+                }
+                td{
+                    height:60px;
+                    text-align:center;
+                    vertical-align:middle;
+                    border-bottom:.5px solid $primaryColor;
+                   input{/*刪除按鈕X*/
+                       background:transparent;
+                       border:none;
+                       color:red;
+                       &:hover{
+                            font-weight:bold;
+                            background:orange;
+                        }
+                   }
+                  
+                    span{
+                        border-radius:50%;
+                        display:block;
+                        width:20px;
+                        height:20px;
+                        color:white;
+                        background:$primaryColor;
+                        margin-left:20px;
+                    }
+                   
+                }
+            }
+           button{ /*結帳按鈕*/
+               width:200px;
+               margin-top:100px;
+               position:absolute;
+               bottom:-100px;
+               left:40%;
+           }
+        }
+    }
+    
+  
+ 

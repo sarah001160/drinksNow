@@ -1,0 +1,242 @@
+@charset "UTF-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.butt {
+  border-radius: 4px; }
+
+.butt:hover {
+  color: darkred; }
+
+.f-bold {
+  /*粗體字*/
+  font-weight: bold; }
+
+.verti-c {
+  /*垂直置中*/
+  vertical-align: middle; }
+
+.horiz-c {
+  text-align: center; }
+
+.horiz-l {
+  text-align: left; }
+
+.horiz-r {
+  text-align: right; }
+
+#app {
+  width: 100%;
+  height: auto;
+  font-family: Arial; }
+  #app .header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0px 0 100px 0;
+    padding-top: 10px;
+    width: 100%;
+    height: 50px;
+    background: orange;
+    color: white;
+    -webkit-box-shadow: 2px 2px 20px black;
+    box-shadow: 2px 2px 20px black;
+    position: fixed;
+    top: 0;
+    left: 0; }
+    @media (max-width: 576px) {
+      #app .header {
+        background: green; } }
+    @media (min-width: 576.1px) and (max-width: 853px) {
+      #app .header {
+        background: pink; } }
+    #app .header h2 {
+      margin: 0 0 0 20px;
+      font-weight: bold;
+      font-style: italic; }
+  #app .header.jqtransparent {
+    height: 0px;
+    padding: 0;
+    margin: 0;
+    -webkit-transition: ease .2s;
+    -o-transition: ease .2s;
+    transition: ease .2s; }
+    #app .header.jqtransparent h2 {
+      display: none; }
+  #app .menu {
+    margin: 300px auto 300px auto;
+    width: 100%; }
+    #app .menu .drinksCatelog {
+      padding: 20px 0 20px 0;
+      margin: 0 auto; }
+      #app .menu .drinksCatelog > div {
+        display: inline-block;
+        width: 30%;
+        padding: 2px  5px 10px 5px;
+        border: .5px solid white;
+        border-radius: 10px;
+        margin: 25px 1%;
+        min-height: 300px;
+        -webkit-box-shadow: .5px 1px 3px grey;
+        box-shadow: .5px 1px 3px grey;
+        position: relative; }
+        @media (max-width: 576px) {
+          #app .menu .drinksCatelog > div {
+            /*手機板時 div請放寬*/
+            width: 90%;
+            margin: 25px 5%; } }
+        @media (min-width: 576.1px) and (max-width: 853px) {
+          #app .menu .drinksCatelog > div {
+            width: 45%;
+            margin: 25px 2%; } }
+        #app .menu .drinksCatelog > div > div {
+          text-align: center; }
+          #app .menu .drinksCatelog > div > div img {
+            width: 50%;
+            height: 200px;
+            margin-top: 0px; }
+        #app .menu .drinksCatelog > div h5 {
+          margin: 5px auto; }
+        #app .menu .drinksCatelog > div .selection {
+          /*background:yellow;*/ }
+          #app .menu .drinksCatelog > div .selection label {
+            margin-top: 5px;
+            text-align: left; }
+          #app .menu .drinksCatelog > div .selection select {
+            border: none;
+            border-radius: 2px;
+            background: #ece0cf;
+            width: 60px;
+            height: 30px;
+            margin: 5px 5px 0 0; }
+          #app .menu .drinksCatelog > div .selection #addsnack {
+            width: 170px; }
+      #app .menu .drinksCatelog button {
+        margin-top: 10px;
+        margin-left: 30px;
+        width: 50%;
+        height: 40px;
+        background: #dbc3a3;
+        color: white;
+        border: none; }
+        #app .menu .drinksCatelog button:hover {
+          background: #ffb01f;
+          font-weight: bold; }
+    #app .menu .drinksMenu {
+      /*table*/
+      width: 90%;
+      height: auto;
+      margin: 50px auto;
+      border: 1px solid black;
+      background: pink; }
+      #app .menu .drinksMenu th {
+        width: 8%;
+        height: 50px;
+        border-bottom: 1px solid black; }
+      #app .menu .drinksMenu td {
+        width: 8%;
+        height: 50px;
+        text-align: center;
+        border-bottom: 1px solid black;
+        text-align: left; }
+      #app .menu .drinksMenu td:nth-child(1) {
+        text-align: center; }
+  #app input[type="checkbox"] {
+    /*中括號可以指定屬性喔*/
+    width: 50px;
+    height: 50px; }
+  #app .calNum li {
+    display: inline-block; }
+  #app .cartArea {
+    /*加入購物車*/
+    width: 100%;
+    height: auto;
+    margin: 100px auto;
+    position: relative; }
+    #app .cartArea table {
+      width: 70%;
+      height: 60px;
+      margin: 0 auto;
+      background: white;
+      height: 50px;
+      border: 1px solid #dbc3a3; }
+      @media (min-width: 576.1px) and (max-width: 853px) {
+        #app .cartArea table {
+          width: 90%; } }
+      @media (max-width: 576px) {
+        #app .cartArea table {
+          width: 90%; } }
+      #app .cartArea table th {
+        height: 60px; }
+      #app .cartArea table td {
+        height: 60px;
+        text-align: center;
+        vertical-align: middle;
+        border-bottom: 0.5px solid #dbc3a3; }
+        #app .cartArea table td input {
+          /*刪除按鈕X*/
+          background: transparent;
+          border: none;
+          color: red; }
+          #app .cartArea table td input:hover {
+            font-weight: bold;
+            background: orange; }
+        #app .cartArea table td span {
+          border-radius: 50%;
+          display: block;
+          width: 20px;
+          height: 20px;
+          color: white;
+          background: #dbc3a3;
+          margin-left: 20px; }
+    #app .cartArea button {
+      /*結帳按鈕*/
+      width: 200px;
+      margin-top: 100px;
+      position: absolute;
+      bottom: -100px;
+      left: 40%; }

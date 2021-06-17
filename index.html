@@ -4,211 +4,389 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>喝飲料</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!---自製CSS--->
+    <link rel="stylesheet" href="CSS/all.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <!--匯入Vue jquery--->
+    <!---自製jQuery-->
+    <script src="JS/alljq.js"></script>
 </head>
-<style>/*請獨立出一隻CSS 比較好管理*/
-    html,body{
-        width:100%;
-    }
-    table th,td{
-        width:100px;
-    }
-    table td{
-        text-align:center;
-    }
-    input[type="checkbox"]{/*中括號可以指定屬性喔*/
-        width:50px;
-        height:50px;
-    }
-    .calNum li{
-        display:inline-block;
-    }
-    td.bgred{
-        background:red;
-    }
-    .cartArea{
-        width:70%;
-    }
-    .cartArea ul{
-        margin-top:20px;
-        background:pink;
-        padding:10px;
-    }
- 
-</style>
+
 <body>
     <div id="app">
-        <h1>定飲料</h1>
+        <div class="header">
+            <h2 class="h2">Drinks Now!</h2>
+        </div>
         <div class="menu">
-            <table>
+            <h2 class="h2 horiz-c">Menu</h2>
+            <div class="drinksCatelog">
+                <!-- <div> -測試--
+                    <div><img src="thumb2.png"></div>
+                    <div class="tag">中杯$45 <br>大杯$55</div>
+                    <h5 class="h5 f-bold horiz-c">混珠奶茶</h5>
+                    <div>
+                        <label for="size">容量</label>
+                        <select name="" id="size">
+                            <option value=""></option>
+                            <option value="中杯">中杯</option>
+                            <option value="大杯">大杯</option>
+                        </select>
+                        <label for="sugar">糖度</label>
+                        <select name="" id="sugar">
+                            <option value=""></option>
+                            <option value="無糖">無糖</option>
+                            <option value="微糖">微糖</option>
+                            <option value="半糖">半糖</option>
+                            <option value="全糖">全糖</option>
+                        </select>
+                        <br>
+                        <label for="icecube">冰塊</label>
+                        <select name="" id="icecube">
+                            <option value=""></option>
+                            <option value="去冰">去冰</option>
+                            <option value="微冰">微冰</option>
+                            <option value="少冰">少冰</option>
+                            <option value="正常冰">正常冰</option>
+                        </select>
+                        <label for="addsnack">加料</label>
+                        <select name="" id="addsnack">
+                            <option value=""></option>
+                            <option value="小珍珠">小珍珠</option>
+                            <option value="芋圓">芋圓</option>
+                            <option value="蒟蒻">蒟蒻</option>
+                            <option value="大珍珠">大珍珠</option>
+                        </select>
+                        <button>加入購物車</button>
+                    </div>
+                </div> -->
+                <div v-for="(item,key) in List" :key="item">
+                    <div><img :src="item.img"></div>
+                    <h5 class="h5 f-bold horiz-c">{{item.name}}</h5>
+                    <div class="tag">中杯${{item.Mprice}} <br>大杯${{item.Lprice}}</div>
+                    <div class="selection">
+                        <label for="size">容量</label>
+                        <select name="" id="size" @change="selection(item)" v-model="item.size">
+                            <option value=""></option>
+                            <option value="M">中杯</option>
+                            <option value="L">大杯</option>
+                        </select>
+                        
+                        <label for="num">數量</label>
+                        <select name="" id="num"  v-model="item.number">
+                            <option value=""></option>
+                            <option v-for="num in 10" :value="num" :key="value">{{num}}</option>
+                        </select>
+                        <br>
+                        <label for="sugar">糖度</label>
+                        <select name="" id="sugar" v-model="item.sugar">
+                            <option value=""></option>
+                            <option value="無糖">無糖</option>
+                            <option value="微糖">微糖</option>
+                            <option value="半糖">半糖</option>
+                            <option value="全糖">全糖</option>
+                        </select>
+                        
+                        <label for="icecube">冰塊</label>
+                        <select name="" id="icecube" v-model="item.ice">
+                            <option value=""></option>
+                            <option value="去冰">去冰</option>
+                            <option value="微冰">微冰</option>
+                            <option value="少冰">少冰</option>
+                            <option value="正常冰">正常冰</option>
+                        </select>
+                        <br>
+                        <label for="addsnack">加料</label>
+                        <select name="" id="addsnack" v-model="item.snack">
+                            <option value=""></option>
+                            <option value="小珍珠">小珍珠</option>
+                            <option value="芋圓">芋圓</option>
+                            <option value="蒟蒻">蒟蒻</option>
+                            <option value="大珍珠">大珍珠</option>
+                        </select>
+                        <br>
+                        <button @click="Addtocart(item)">加入購物車</button>
+                    </div>
+                </div>
+            </div>
+            <!-- <table class="drinksMenu">
                 <tr>
-                    <th></th>
-                    <th>品項</th>
-                    <th>中杯價錢</th>
-                    <th>大杯價錢</th>
-                    <th>容量</th>
-                    <th>甜度</th>
+                    <th class="f-bold verti-c"></th>
+                    <th class="f-bold verti-c">品項</th>
+                    <th class="f-bold verti-c">M</th>
+                    <th class="f-bold verti-c">L</th>
+                    <th class="f-bold verti-c">容量</th>
+                    <th class="f-bold verti-c">甜度</th>
+                    <th class="f-bold verti-c">冰塊</th>
                     <th style="width:200px">數量</th>
-                    <th>價錢</th>
-                    <th>訂購</th>
+                    <th class="f-bold verti-c">價錢</th>
+                    <th class="f-bold verti-c">訂購</th>
                 </tr>
                 <tr v-for="(item,key) in List" :key=item>
-                    <td><input type="button"  value="訂購" @click="Gotocart(item)"></td>
+                    <td><input type="button"  value="訂購" @click="Addtocart(item)"></td>
                     <td :class="{'bgred':item.check===true}">{{item.name}}</td>
                     <td>{{item.Mprice}}</td>
                     <td>{{item.Lprice}}</td>
                     <td>
                         <select name="" id="" @change="selection(item)" v-model="item.size">
                             <option value=""> </option>
-                            <option value="medium">中杯</option>
-                            <option value="large">大杯</option>
+                            <option value="M">中杯</option>
+                            <option value="L">大杯</option>
                         </select>
                     </td>
                     <td>
-                        <select name="" id="" @change="selection(item)" v-model="item.sugar">
+                        <select name="" id="" v-model="item.sugar">
                             <option value=""> </option>
                             <option value="半糖">半糖</option>
                             <option value="全糖">全糖</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="" id="" v-model="item.ice">
+                            <option value=""></option>
+                            <option value="去冰">去冰</option>
+                            <option value="少冰">少冰</option>
                         </select>
                     </td>
                     <td>{{item.number}}</td>
                     <td>{{item.price}}</td>
                 </tr>
                
+            </table>  -->
+        </div>
+        <div class="cartArea">
+            <!-- 顯示購物車
+            <ul v-for="(item,key) in showsList">
+                <li><button @click="removeFromcart(item)">刪除</button></li>
+                <li>飲料:{{item.title}}</li>
+                <li>價錢:{{item.price}}</li>
+                <li>甜度:{{item.sugar}}</li>
+                <li>數量{{item.num}}</li>
+            </ul> -->
+            <h2 class="h2 horiz-c">已加入購物車</h2>
+            <table>
+                <tr style="background:#ffe75c;">
+                    <th></th>
+                    <th class="f-bold verti-c horiz-c" style="width:8%;"></th>
+                    <th class="f-bold verti-c horiz-c" style="width:20%;">飲料</th>
+                    <th class="f-bold verti-c horiz-c" style="width:10%;">價錢</th>
+                    <th class="f-bold verti-c horiz-c" style="width:10%;">容量</th>
+                    <th class="f-bold verti-c horiz-c">甜度</th>
+                    <th class="f-bold verti-c horiz-c">冰塊</th>
+                    <th class="f-bold verti-c horiz-c">加料</th>
+                    <th class="f-bold verti-c horiz-c">數量</th>
+                    <th class="f-bold verti-c horiz-c">金額</th>
+                </tr>
+                <tr v-for="(item,key) in showsList">
+                    <td> <input type="button" class="butt" value="X" @click="removeFromcart(item)"></input>
+                    <td><span>{{key +1}}</span></td>
+                    <td>{{item.title}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.size}}</td>
+                    <td>{{item.sugar}}</td>
+                    <td>{{item.ice}}</td>
+                    <td>{{item.snack}}</td>
+                    <td>{{item.num}}</td>
+                    <td>{{item.num * item.price}}元</td>
+                </tr>
             </table>
-            <div class="cartArea">
-                顯示購物車
-                <ul v-for="(item,key) in showsList">
-                    <li><button @click="removeFromcart(item)">刪除</button></li>
-                    <li>飲料:{{item.title}}</li>
-                    <li>價錢:{{item.price}}</li>
-                    <li>甜度:{{item.sugar}}</li>
-                    <li>數量{{item.num}}</li>
-                </ul>
-            </div>
-           
-        
+            <div><button class="btn btn-primary">結帳去</button></div>
         </div>
 
-        <div class="memo">
-            <ul>
-                <h2>代辦事項</h2>
-                <li>飲料要加上圖片</li>
-                <li>空白的飲料不能加入購物車,要選冰塊甜度的容量大小</li>
-                <li>加油!</li>
-                <li>建議試試看自製的json檔案,練習restfulapi可以去看保哥的youtube</li>
-                <li>已加入購物車的商品建議出現可編輯的按鈕,調整數量甜度冰塊使用</li>
-                <li>計算金額總額</li>
-                <li>記得響應式的網頁也要切出來唷</li>
-            </ul>
-        </div>
+       
     </div>
     <script>
         var app = new Vue({
-            el:'#app',
-            data:{
-                mssg:'123',
-                List:[
+            el: '#app',
+            data: {
+                mssg: '123',
+                List: [
                     {
-                        name:'紅茶',
-                        Mprice:20,
-                        Lprice:30,
-                        sugar:'',
-                        size:'',
-                        number:0,
-                        ice:'',
-                        check:false,
-                        price:'',
+                        name: '紅茶',
+                        Mprice: 20,
+                        Lprice: 30,
+                        sugar: '',
+                        snack:'',
+                        size: '',
+                        number: 0,
+                        ice: '',
+                        check: false,
+                        price: '',
+                        img: 'https://images.unsplash.com/photo-1610137312679-8de3a836b455?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=805&q=80',
                     },
                     {
-                        name:'珍珠奶茶',
-                        Mprice:40,
-                        Lprice:50,
-                        sugar:'',
-                        size:'',
-                        number:0,
-                        price:'',
-                        ice:'',
-                        check:false,
-                        price:'',
+                        name: '珍珠奶茶',
+                        Mprice: 40,
+                        Lprice: 50,
+                        sugar: '',
+                        snack:'',
+                        size: '',
+                        number: 0,
+                        price: '',
+                        ice: '',
+                        check: false,
+                        price: '',
+                        img: 'https://foodtracer.taipei.gov.tw/Backend/upload/product/54056661/54056661_22.jpg',
+                    },
+                    {
+                        name: '普洱茶',
+                        Mprice: 40,
+                        Lprice: 50,
+                        sugar: '',
+                        snack:'',
+                        size: '',
+                        number: 0,
+                        price: '',
+                        ice: '',
+                        check: false,
+                        price: '',
+                        img: 'http://s2.healthlooker.com/imgs/201911/13/5/15736376524196.jpg',
+                    },
+                    {
+                        name: '特級綠茶',
+                        Mprice: 40,
+                        Lprice: 50,
+                        sugar: '',
+                        snack:'',
+                        size: '',
+                        number: 0,
+                        price: '',
+                        ice: '',
+                        check: false,
+                        price: '',
+                        img: 'https://tse1.mm.bing.net/th?id=OIP.Qi742bNM1mZCSzs2Y87QewHaHa&pid=Api&P=0&w=300&h=300',
+                    },
+                    {
+                        name: '原鄉四季',
+                        Mprice: 40,
+                        Lprice: 50,
+                        sugar: '',
+                        snack:'',
+                        size: '',
+                        number: 0,
+                        price: '',
+                        ice: '',
+                        check: false,
+                        price: '',
+                        img: 'https://tse1.mm.bing.net/th?id=OIP.M05IK92STyooRnytqbYkKQDfEX&pid=Api&P=0&w=300&h=300',
+                    },
+                    {
+                        name: '四季烏龍',
+                        Mprice: 40,
+                        Lprice: 50,
+                        sugar: '',
+                        snack:'',
+                        size: '',
+                        number: 0,
+                        price: '',
+                        ice: '',
+                        check: false,
+                        price: '',
+                        img: '',
+                    },
+                    {
+                        name: '日月潭紅茶',
+                        Mprice: 40,
+                        Lprice: 50,
+                        sugar: '',
+                        snack:'',
+                        size: '',
+                        number: 0,
+                        price: '',
+                        ice: '',
+                        check: false,
+                        price: '',
+                        img: '',
                     },
                 ],
-                cartlist:JSON.parse(localStorage.getItem('drinkslist'))||[],
+                cartlist: JSON.parse(localStorage.getItem('drinkslist')) || [],
             },
-            created(){
+            created() {
 
             },
-            methods:{
-                selection(item){
+            methods: {
+                selection(item) {
                     const checkitemSize = item.size;
                     console.log(checkitemSize);
-                    switch(checkitemSize){//善用switch
-                        case 'medium':
-                        item.price=item.Mprice;
-                        break;
+                    switch (checkitemSize) {//善用switch
+                        case 'M':
+                            item.price = item.Mprice;
+                            break;
 
-                        case 'large':
-                        item.price=item.Lprice;
-                        break;
-                        
+                        case 'L':
+                            item.price = item.Lprice;
+                            break;
+
                         case '':
-                        item.price=''
-                        break;
+                            item.price = ''
+                            break;
 
-                        defulat:
-                        item.price=''
-                        break;
-                   
+                            defulat:
+                            item.price = ''
+                            break;
+
                     }
                     console.log(item)
-                    
+
                 },
-                Gotocart(item){
+                Addtocart(item) {
                     //這邊要檢視那些影料有打勾勾,打勾者加入購物車陣列中
                     //到時候再用mounted呼叫這個mehtods
-                    if(item.size===" "||item.sugar===''){return}
-                    const value= item.name;
-                    const valueSize=item.size;
+                    if (item.size ==="" || item.sugar === "" || item.ice === "") { return }
+                    const value = item.name;
+                    const valueSize = item.size;
                     const valueSugar = item.sugar;
                     const valuePrice = item.price;
-                    const timestamp = Math.floor(Date.now()/1000);
-                     const txt={
-                        id:timestamp,
-                        title:value,
-                        price:valuePrice,
-                        sugar:valueSugar
-                     }
+                    const valueIce = item.ice;
+                    const valueSnack = item.snack;
+                    const valueNum = item.number;
+                    const timestamp = Math.floor(Date.now() / 1000);
+                    const txt = {
+                        id: timestamp,
+                        title: value,
+                        price: valuePrice,
+                        sugar: valueSugar,
+                        ice: valueIce,
+                        size: valueSize,
+                        snack: valueSnack,
+                        num:valueNum,
+                    }
                     this.cartlist.push(txt);
                     console.log(this.cartlist)
-                    localStorage.setItem('drinkslist',JSON.stringify(this.cartlist))
-                    item.size='';
-                    item.sugar='';
-                    item.price='';
-
-                    
+                    localStorage.setItem('drinkslist', JSON.stringify(this.cartlist))//存入網頁中的localstorage,刷新頁面時才會保持在最新狀態
+                    item.size = ''; //加入購物車後,原本的下拉式要淨空
+                    item.sugar = '';
+                    item.snack = '';
+                    item.price = '';
+                    item.ice = '';
+                    item.number='';
+                   
                 },
-                removeFromcart(item){
+                removeFromcart(item) {//移除購物車商品
                     const vm = this;
-                    const Index = vm.cartlist.indexOf(item);
+                    const Index = vm.cartlist.indexOf(item);//先找出各項item的索引
                     console.log(Index)
                     console.log(item.title)
-                    this.cartlist.splice(Index,1);
-                     localStorage.setItem('drinkslist',JSON.stringify(this.cartlist));
-
+                    this.cartlist.splice(Index, 1);
+                    localStorage.setItem('drinkslist', JSON.stringify(this.cartlist));//存檔至網頁中的localstorage
                 }
             },
-            computed:{
-               showsList(){
-                   return this.cartlist;
-               },
-            
-               
-            
+            computed: {
+                showsList() {
+                    return this.cartlist;
+                },
             }
         })
     </script>
-    
+
 </body>
+
 </html>
