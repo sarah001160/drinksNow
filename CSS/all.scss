@@ -205,26 +205,24 @@ $primaryColor:#dbc3a3;
                 @include mobile{
                     width:90%;
                 }
-                tr{}
                 th{
                     height:60px;
-                   
                 }
                 td{
                     height:60px;
                     text-align:center;
                     vertical-align:middle;
                     border-bottom:.5px solid $primaryColor;
-                   input{/*刪除按鈕X*/
+                   input[type="button"]{/*刪除按鈕X*/
                        background:transparent;
                        border:none;
                        color:red;
+                       width:20px;
                        &:hover{
                             font-weight:bold;
                             background:orange;
                         }
                    }
-                  
                     span{
                         border-radius:50%;
                         display:block;
@@ -232,7 +230,7 @@ $primaryColor:#dbc3a3;
                         height:20px;
                         color:white;
                         background:$primaryColor;
-                        margin-left:20px;
+                        margin-left:0px;
                     }
                    
                 }

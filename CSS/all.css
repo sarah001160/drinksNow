@@ -217,12 +217,13 @@ table {
         text-align: center;
         vertical-align: middle;
         border-bottom: 0.5px solid #dbc3a3; }
-        #app .cartArea table td input {
+        #app .cartArea table td input[type="button"] {
           /*刪除按鈕X*/
           background: transparent;
           border: none;
-          color: red; }
-          #app .cartArea table td input:hover {
+          color: red;
+          width: 20px; }
+          #app .cartArea table td input[type="button"]:hover {
             font-weight: bold;
             background: orange; }
         #app .cartArea table td span {
@@ -232,7 +233,7 @@ table {
           height: 20px;
           color: white;
           background: #dbc3a3;
-          margin-left: 20px; }
+          margin-left: 0px; }
     #app .cartArea button {
       /*結帳按鈕*/
       width: 200px;
