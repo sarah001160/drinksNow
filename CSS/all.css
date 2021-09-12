@@ -72,32 +72,24 @@ table {
 #app {
   width: 100%;
   height: auto;
-  font-family: Arial; }
+  font-family: Arial;
+  /*在modal中的購物車*/ }
   #app .header {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     margin: 0px 0 100px 0;
     padding-top: 10px;
     width: 100%;
     height: 50px;
-    background: orange;
-    color: white;
-    -webkit-box-shadow: 2px 2px 20px black;
-    box-shadow: 2px 2px 20px black;
+    /* background-color:rgba(248, 248, 248,0.1);*/
     position: fixed;
     top: 0;
-    left: 0; }
-    @media (max-width: 576px) {
-      #app .header {
-        background: green; } }
-    @media (min-width: 576.1px) and (max-width: 853px) {
-      #app .header {
-        background: pink; } }
-    #app .header h2 {
-      margin: 0 0 0 20px;
-      font-weight: bold;
-      font-style: italic; }
+    left: 0;
+    z-index: 1000; }
+    #app .header h2 img {
+      width: 9%;
+      overflow: hidden; }
+      @media (max-width: 576px) {
+        #app .header h2 img {
+          width: 30%; } }
   #app .header.jqtransparent {
     height: 0px;
     padding: 0;
@@ -107,19 +99,64 @@ table {
     transition: ease .2s; }
     #app .header.jqtransparent h2 {
       display: none; }
-  #app .menu {
-    margin: 300px auto 300px auto;
+  #app .section {
+    height: 700px;
+    overflow: hidden;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff9100), to(#ff809f));
+    background: -webkit-linear-gradient(#ff9100, #ff809f);
+    background: -o-linear-gradient(#ff9100, #ff809f);
+    background: linear-gradient(#ff9100, #ff809f);
+    position: relative;
+    background-image: url("https://images.unsplash.com/photo-1508020963102-c6c723be5764?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80");
+    background-size: cover;
     width: 100%; }
+  #app .section span {
+    position: absolute;
+    /*left跟top在js中設定*/
+    z-index: 2;
+    pointer-events: none;
+    /* border-radius: 50%; */
+    background-size: contain;
+    background-repeat: no-repeat;
+    -webkit-animation: animate 9s linear forwards;
+    animation: animate 9s linear forwards; }
+
+@-webkit-keyframes animate {
+  0% {
+    -webkit-transform: perspective(500px) rotateY(0) translateX(-250px);
+    transform: perspective(500px) rotateY(0) translateX(-250px); }
+  50% {
+    opacity: 1; }
+  100% {
+    -webkit-transform: perspective(500px) rotateY(50deg) translateX(1000%);
+    transform: perspective(500px) rotateY(50deg) translateX(1000%);
+    opacity: 0; } }
+
+@keyframes animate {
+  0% {
+    -webkit-transform: perspective(500px) rotateY(0) translateX(-250px);
+    transform: perspective(500px) rotateY(0) translateX(-250px); }
+  50% {
+    opacity: 1; }
+  100% {
+    -webkit-transform: perspective(500px) rotateY(50deg) translateX(1000%);
+    transform: perspective(500px) rotateY(50deg) translateX(1000%);
+    opacity: 0; } }
+  #app .menu {
+    margin: 0px auto 300px auto;
+    width: 100%;
+    position: relative; }
     #app .menu .drinksCatelog {
-      padding: 20px 0 20px 0;
-      margin: 0 auto; }
+      padding: 5px 0 20px 0;
+      margin: 100px auto; }
       #app .menu .drinksCatelog > div {
         display: inline-block;
         width: 30%;
-        padding: 2px  5px 10px 5px;
+        padding: 10px 0px;
         border: .5px solid white;
+        background: rgba(248, 248, 248, 0.8);
         border-radius: 10px;
-        margin: 25px 1%;
+        margin: 10px 1%;
         min-height: 300px;
         -webkit-box-shadow: .5px 1px 3px grey;
         box-shadow: .5px 1px 3px grey;
@@ -133,16 +170,29 @@ table {
           #app .menu .drinksCatelog > div {
             width: 45%;
             margin: 25px 2%; } }
-        #app .menu .drinksCatelog > div > div {
-          text-align: center; }
-          #app .menu .drinksCatelog > div > div img {
-            width: 50%;
-            height: 200px;
-            margin-top: 0px; }
+        #app .menu .drinksCatelog > div > .forImg {
+          text-align: center;
+          overflow: hidden; }
+          #app .menu .drinksCatelog > div > .forImg img {
+            max-width: 100%;
+            height: 160px;
+            margin-top: 0px;
+            cursor: pointer; }
+          #app .menu .drinksCatelog > div > .forImg img:hover {
+            -webkit-transition: ease 1.5s;
+            -o-transition: ease 1.5s;
+            transition: ease 1.5s;
+            -webkit-transform: scale(1.2);
+            -ms-transform: scale(1.2);
+            transform: scale(1.2); }
         #app .menu .drinksCatelog > div h5 {
           margin: 5px auto; }
+        #app .menu .drinksCatelog > div .tag {
+          width: 100%;
+          padding: 0; }
         #app .menu .drinksCatelog > div .selection {
-          /*background:yellow;*/ }
+          /* background:yellow;*/
+          padding-left: 20%; }
           #app .menu .drinksCatelog > div .selection label {
             margin-top: 5px;
             text-align: left; }
@@ -150,14 +200,14 @@ table {
             border: none;
             border-radius: 2px;
             background: #ece0cf;
-            width: 60px;
+            width: 20%;
             height: 30px;
             margin: 5px 5px 0 0; }
           #app .menu .drinksCatelog > div .selection #addsnack {
             width: 170px; }
       #app .menu .drinksCatelog button {
         margin-top: 10px;
-        margin-left: 30px;
+        margin-left: 15%;
         width: 50%;
         height: 40px;
         background: #dbc3a3;
@@ -197,7 +247,7 @@ table {
     height: auto;
     margin: 100px auto;
     position: relative; }
-    #app .cartArea table {
+    #app .cartArea .cartTable {
       width: 70%;
       height: 60px;
       margin: 0 auto;
@@ -205,28 +255,30 @@ table {
       height: 50px;
       border: 1px solid #dbc3a3; }
       @media (min-width: 576.1px) and (max-width: 853px) {
-        #app .cartArea table {
+        #app .cartArea .cartTable {
           width: 90%; } }
       @media (max-width: 576px) {
-        #app .cartArea table {
+        #app .cartArea .cartTable {
           width: 90%; } }
-      #app .cartArea table th {
+      #app .cartArea .cartTable th {
         height: 60px; }
-      #app .cartArea table td {
+      #app .cartArea .cartTable td {
         height: 60px;
         text-align: center;
         vertical-align: middle;
         border-bottom: 0.5px solid #dbc3a3; }
-        #app .cartArea table td input[type="button"] {
-          /*刪除按鈕X*/
+        #app .cartArea .cartTable td .delBtn {
+          /*刪除按鈕X  input[type="button"],*/
           background: transparent;
           border: none;
           color: red;
           width: 20px; }
-          #app .cartArea table td input[type="button"]:hover {
+          #app .cartArea .cartTable td .delBtn:hover {
             font-weight: bold;
             background: orange; }
-        #app .cartArea table td span {
+        #app .cartArea .cartTable td .delBtn:hover td {
+          background-color: red; }
+        #app .cartArea .cartTable td span {
           border-radius: 50%;
           display: block;
           width: 20px;
@@ -241,3 +293,12 @@ table {
       position: absolute;
       bottom: -100px;
       left: 40%; }
+  #app .btModal {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999; }
+  #app .cartTable tr:hover {
+    background-color: #dbc3a3; }
+  #app .cartTable td {
+    padding-top: 10px; }

@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!---自製CSS--->
     <link rel="stylesheet" href="CSS/all.css">
+    <!--在頁籤加入自己的icon--->
+    <link rel="icon" href="drinkLogo.png" type="image/x-icon"/>
+  
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Popper JS -->
@@ -17,17 +20,31 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <!--匯入Vue jquery--->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js" defer ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/ScrollTrigger.min.js" defer ></script> <!--gsap套件及scrolTrigger都要嵌入,gsap才會發生效果-->
+    
     <!---自製jQuery-->
     <script src="JS/alljq.js"></script>
+    <!---Vue及JS動畫-->
+    <script src="JS/all.js"></script>
 </head>
+<style>
+
+
+</style>
 
 <body>
-    <div id="app">
-        <div class="header">
-            <h2 class="h2">Drinks Now!</h2>
+    <div id="app"> 
+       <div class="header" data-head>
+            <h2><img src="logo1.png" >
+            </h2>
         </div>
+        <div class="section">
+        </div>
+     
         <div class="menu">
-            <h2 class="h2 horiz-c">Menu</h2>
+           <h2 class="h2 mt-3 horiz-c">Menu</h2>
             <div class="drinksCatelog">
                 <!-- <div> -測試--
                     <div><img src="thumb2.png"></div>
@@ -68,11 +85,13 @@
                         <button>加入購物車</button>
                     </div>
                 </div> -->
+              
+
                 <div v-for="(item,key) in List" :key="item">
-                    <div><img :src="item.img"></div>
+                    <div class="forImg"><img :src="item.img"></div>
                     <h5 class="h5 f-bold horiz-c">{{item.name}}</h5>
-                    <div class="tag">中杯${{item.Mprice}} <br>大杯${{item.Lprice}}</div>
-                    <div class="selection">
+                    <div class="tag horiz-c">中杯${{item.Mprice}} <br>大杯${{item.Lprice}}</div>
+                    <div class="selection horiz-l">
                         <label for="size">容量</label>
                         <select name="" id="size" @change="selection(item)" v-model="item.size">
                             <option value=""></option>
@@ -81,13 +100,14 @@
                         </select>
                         
                         <label for="num">數量</label>
-                        <select name="" id="num"  v-model="item.number">
+                        <select  name="" id="num"  v-model="item.number">
                             <option value=""></option>
                             <option v-for="num in 10" :value="num" :key="value">{{num}}</option>
                         </select>
                         <br>
-                        <label for="sugar">糖度</label>
-                        <select name="" id="sugar" v-model="item.sugar">
+
+                        <label for="sugar">甜度</label>
+                        <select  name="" id="sugar" v-model="item.sugar">
                             <option value=""></option>
                             <option value="無糖">無糖</option>
                             <option value="微糖">微糖</option>
@@ -96,7 +116,7 @@
                         </select>
                         
                         <label for="icecube">冰塊</label>
-                        <select name="" id="icecube" v-model="item.ice">
+                        <select   name="" id="icecube" v-model="item.ice">
                             <option value=""></option>
                             <option value="去冰">去冰</option>
                             <option value="微冰">微冰</option>
@@ -104,6 +124,7 @@
                             <option value="正常冰">正常冰</option>
                         </select>
                         <br>
+
                         <label for="addsnack">加料</label>
                         <select name="" id="addsnack" v-model="item.snack">
                             <option value=""></option>
@@ -113,6 +134,7 @@
                             <option value="大珍珠">大珍珠</option>
                         </select>
                         <br>
+
                         <button @click="Addtocart(item)">加入購物車</button>
                     </div>
                 </div>
@@ -171,10 +193,10 @@
                 <li>甜度:{{item.sugar}}</li>
                 <li>數量{{item.num}}</li>
             </ul> -->
-            <h2 class="h2 horiz-c">已加入購物車</h2>
-            <table>
+            <!-- <h2 class="h2 horiz-c">已加入購物車</h2> -->
+            <!-- <table>
                 <tr style="background:#ffe75c;">
-                    <th style="width:20px;"></th>
+                    <th style="width:3%;"></th>
                     <th class="f-bold verti-c horiz-c" style="width:3%;"></th>
                     <th class="f-bold verti-c horiz-c" style="width:19%;">飲料</th>
                     <th class="f-bold verti-c horiz-c" style="width:10%;">價錢</th>
@@ -183,43 +205,111 @@
                     <th class="f-bold verti-c horiz-c" style="width:10%;">冰塊</th>
                     <th class="f-bold verti-c horiz-c" style="width:10%;">加料</th>
                     <th class="f-bold verti-c horiz-c" style="width:10%;">數量</th>
-                    <th class="f-bold verti-c horiz-c" style="width:10%;">金額</th>
+                    <th class="f-bold verti-c horiz-c" style="width:10%;">品項金額</th>
                 </tr>
                 <tr v-for="(item,key) in showsList">
                     <td> <input type="button" class="butt" value="X" @click="removeFromcart(item)"></input>
                     <td><span>{{key +1}}</span></td>
                     <td>{{item.title}}</td>
-                    <td>{{item.price}}</td>
+                    <td>${{item.price}}</td>
                     <td>{{item.size}}</td>
                     <td>{{item.sugar}}</td>
                     <td>{{item.ice}}</td>
                     <td>{{item.snack}}</td>
-                    <td>{{item.num}}</td>
-                    <td>{{item.num * item.price}}元</td>
+                    <td>{{item.num}}杯</td>
+                    <td data-price>{{item.eachRevenue}}元</td>
                 </tr>
-            </table>
-            <div><button class="btn btn-primary">結帳去</button></div>
-        </div>
+            </table> -->
+        
+         
+          
 
+
+        </div>
+        <div class="horiz-c ml-3 mt-3">
+            <h2 class="h2">金額總計:{{Toatlexpense}}元</h2>
+        </div>
+     
+
+  
+ <!-- Button trigger modal -->
+<button type="button" class="btModal btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="openModal()">
+    購物車
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg"><!--調整modal大小--->
+      <div class="modal-content ">
+        <div class="modal-header ">
+          <h5 class="modal-title" id="exampleModalLabel">購物車內容</h5>
+          <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close" @click="hideModal()">X</button>
+        </div>
+        <div class="modal-body">
+            <!---正文放這邊--->
+          <!---測試--->
+          <table class="cartTable">
+            <tr style="background:#ffe75c;">
+                <th style="width:3%;"></th>
+                <th class="f-bold verti-c horiz-c" style="width:1%;"></th>
+                <th class="f-bold verti-c horiz-c" style="width:10%;">飲料</th>
+                <th class="f-bold verti-c horiz-c" style="width:10%;">價錢</th>
+                <th class="f-bold verti-c horiz-c" style="width:10%;">容量</th>
+                <th class="f-bold verti-c horiz-c" style="width:10%;">甜度</th>
+                <th class="f-bold verti-c horiz-c" style="width:10%;">冰塊</th>
+                <th class="f-bold verti-c horiz-c" style="width:10%;">加料</th>
+                <th class="f-bold verti-c horiz-c" style="width:10%;">數量</th>
+                <th class="f-bold verti-c horiz-c" style="width:10%;">小計</th>
+            </tr>
+            <tr v-for="(item,key) in showsList">
+                <td > <input type="button" class="delBtn butt btn-danger" value="X" @click="removeFromcart(item)"></input>
+                <td><span>{{key +1}}</span></td>
+                <td class="verti-c horiz-c" style="width:10%;">{{item.title}}</td>
+                <td class="verti-c horiz-c" style="width:10%;">${{item.price}}</td>
+                <td class="verti-c horiz-c" style="width:10%;">{{item.size}}</td>
+                <td class="verti-c horiz-c" style="width:10%;">{{item.sugar}}</td>
+                <td class="verti-c horiz-c" style="width:10%;">{{item.ice}}</td>
+                <td class="verti-c horiz-c" style="width:10%;">{{item.snack}}</td>
+                <td class="verti-c horiz-c" style="width:10%;">{{item.num}}杯</td>
+                <td data-price  class="verti-c horiz-c" style="width:10%;">{{item.eachRevenue}}元</td>
+            </tr>
+        </table>
+
+
+          <!----//end--->     
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="hideModal()">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+            
        
     </div>
-    <script>
+
+
+
+    <script> 
         var app = new Vue({
             el: '#app',
             data: {
                 mssg: '123',
+                totalAmount:0,
+                Toatlexpense:'',
                 List: [
                     {
                         name: '紅茶',
-                        Mprice: 20,
-                        Lprice: 30,
-                        sugar: '',
-                        snack:'',
-                        size: '',
-                        number: 0,
-                        ice: '',
+                        Mprice: 20,//中杯價錢
+                        Lprice: 30,//大杯價錢
+                        sugar: '',//甜度
+                        snack:'',//加料
+                        size: '',//user實際選的容量是中or大杯,要看selection
+                        number: 0,//預設數量0杯
+                        ice: '',//冰塊
                         check: false,
-                        price: '',
+                        price: '',//user實際選的容量中杯或大杯會決定價格
                         img: 'https://images.unsplash.com/photo-1610137312679-8de3a836b455?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=805&q=80',
                     },
                     {
@@ -290,10 +380,10 @@
                         ice: '',
                         check: false,
                         price: '',
-                        img: '',
+                        img: 'https://images.unsplash.com/photo-1498481548071-4d439c62cd6e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=645&q=80',
                     },
                     {
-                        name: '日月潭紅茶',
+                        name: '巧克力奶昔',
                         Mprice: 40,
                         Lprice: 50,
                         sugar: '',
@@ -304,18 +394,25 @@
                         ice: '',
                         check: false,
                         price: '',
-                        img: '',
+                        img: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
                     },
                 ],
                 cartlist: JSON.parse(localStorage.getItem('drinkslist')) || [],
             },
             created() {
-
+                this.calExp();
             },
             methods: {
+                openModal(){
+                    $('#exampleModal').modal('show')//打開modal
+                },
+                hideModal(){
+                    $('#exampleModal').modal('hide')//關閉modal
+                },
+
                 selection(item) {
                     const checkitemSize = item.size;
-                    console.log(checkitemSize);
+                    console.log(checkitemSize);//先檢查
                     switch (checkitemSize) {//善用switch
                         case 'M':
                             item.price = item.Mprice;
@@ -338,7 +435,7 @@
 
                 },
                 Addtocart(item) {
-                    //這邊要檢視那些影料有打勾勾,打勾者加入購物車陣列中
+                    //這邊要檢視那些飲料有打勾勾,打勾者加入購物車陣列中
                     //到時候再用mounted呼叫這個mehtods
                     if (item.size ==="" || item.sugar === "" || item.ice === "") { return }
                     const value = item.name;
@@ -348,6 +445,7 @@
                     const valueIce = item.ice;
                     const valueSnack = item.snack;
                     const valueNum = item.number;
+                    const eachRevenue = valuePrice*valueNum;
                     const timestamp = Math.floor(Date.now() / 1000);
                     const txt = {
                         id: timestamp,
@@ -358,35 +456,95 @@
                         size: valueSize,
                         snack: valueSnack,
                         num:valueNum,
+                        eachRevenue:eachRevenue,//杯數*每一杯的價錢
                     }
-                    this.cartlist.push(txt);
+                    this.cartlist.push(txt);//加入購物車陣列
                     console.log(this.cartlist)
                     localStorage.setItem('drinkslist', JSON.stringify(this.cartlist))//存入網頁中的localstorage,刷新頁面時才會保持在最新狀態
-                    item.size = ''; //加入購物車後,原本的下拉式要淨空
+                    item.size = ''; //加入購物車後,原本的下拉式選項要淨空
                     item.sugar = '';
                     item.snack = '';
                     item.price = '';
                     item.ice = '';
                     item.number='';
+                    this.calExp()//計算購物車總金額
                    
                 },
                 removeFromcart(item) {//移除購物車商品
                     const vm = this;
                     const Index = vm.cartlist.indexOf(item);//先找出各項item的索引
-                    console.log(Index)
-                    console.log(item.title)
+                    console.log(Index)//查看索引是哪一筆item
+                    console.log(item.title)//查看索引是哪一筆item
                     this.cartlist.splice(Index, 1);
+                    this.calExp()
                     localStorage.setItem('drinkslist', JSON.stringify(this.cartlist));//存檔至網頁中的localstorage
                 }
             },
             computed: {
                 showsList() {
-                    return this.cartlist;
+                   console.log(this.cartlist)
+                   return this.cartlist;
                 },
+                calExp(){
+                    const vm=this;
+                    let a =vm.cartlist.map(el=>{
+                        return el.eachRevenue
+                    })
+                    let sum=0;
+                    let b=a.forEach(el=>{
+                       return sum+=el; //所有項目金額加總
+                    })
+                    console.log(sum); //查看sum
+                    this.Toatlexpense=sum; //Totalexpense需要轉型為數值嗎?
+                    console.log(Toatlexpense); //查看Totalexpense
+                },
+              
+             
+              
+
+
             }
         })
-    </script>
+    </script> 
 
+    
+   
 </body>
+
+<!--for drop image--->
+<script>//動畫設定JS
+    let images = [
+                'url("beverage.png")',
+                'url("timthumb.png")',
+                'url("timthumb (1).png")',
+                'url("stars.png")',
+                'url("ystar.png")',
+            ];
+            function dropImage(){
+                let section = document.querySelector('.section')
+                let drop = document.createElement('span');
+                //drop.style.left = Math.random() * innerWidth + 'px';
+                drop.style.top = Math.random() * innerHeight + 'px';
+
+                let bg = images[Math.floor(Math.random() * images.length)];
+
+                let size = Math.random() * 200;
+                drop.style.width  = 50+size+'px';
+                drop.style.height = 50+size+'px';
+                drop.style.backgroundImage = bg;
+                drop.style.backgroundColor='transparent';
+
+                section.appendChild(drop);
+
+                setTimeout(() =>{
+                    drop.remove()
+                },6000)             
+
+            }
+            setInterval(dropImage, 80);
+        
+
+</script>
+
 
 </html>

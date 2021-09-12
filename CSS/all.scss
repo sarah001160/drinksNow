@@ -1,9 +1,11 @@
 @import "_reset.scss";
+
 @mixin mobile{
     @media(max-width:576px){
         @content
     }
 }
+
 @mixin tablet{
     @media(min-width:576.1px)and(max-width:853px){
         @content
@@ -16,7 +18,7 @@
    
 }
 .butt:hover{
-    color:darkred;
+    color:darkred; //顏色是深紅色
 }
 .f-bold{/*粗體字*/
     font-weight:bold;
@@ -44,31 +46,39 @@ $primaryColor:#dbc3a3;
         font-family:Arial;
         
         .header{
-            display:flex;
             margin:0px 0 100px 0;
             padding-top:10px;
             width:100%;
             height:50px;
-            background:orange;
-            color:white;
-            box-shadow:2px 2px 20px black;
+           /* background-color:rgba(248, 248, 248,0.1);*/
             position:fixed;
             top:0;
             left:0;
+            z-index:1000;
            @include mobile{
-               background:green;
+              //手機板設定
+              
            }
            @include tablet{
-               background:pink;
+               //header平板設定
            }
-         
             h2{
-                margin:0 0 0 20px;
-                font-weight:bold;
-                font-style:italic;
-            } 
+                
+                img{
+                    width:9%;
+                    overflow:hidden;
+
+                    @include mobile{
+                        width:30%;
+                    }
+                    @include tablet{
+                    
+                    }
+                }
+            }
+          
         }
-        .header.jqtransparent{
+        .header.jqtransparent{ //window scroll時 .header透明化
             height:0px;
             padding:0;
             margin:0;
@@ -77,19 +87,53 @@ $primaryColor:#dbc3a3;
                 display:none;
             }
         }
-        .menu{
-            margin:300px auto 300px auto;
+        .section{
+            height:700px;
+            overflow: hidden;
+            background: linear-gradient(hsla(34, 100%, 50%, 1),hsla(345, 100%, 75%, 1));
+            position:relative;
+            background-image:url('https://images.unsplash.com/photo-1508020963102-c6c723be5764?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');
+            background-size:cover;
             width:100%;
+            
+        }
+        .section span{
+            position: absolute;/*left跟top在js中設定*/
+            z-index:2;
+            pointer-events: none;
+            /* border-radius: 50%; */
+            background-size: contain;
+            background-repeat:no-repeat;
+            animation: animate 9s linear forwards;
+        }   
+        @keyframes animate{
+            0%{
+                transform:perspective(500px) rotateY(0)  translateX(-250px);
+            }
+            50%{
+                opacity: 1;
+            }
+            100%{
+                transform:perspective(500px)  rotateY(50deg) translateX(1000%);
+                opacity: 0;
+            }
+        }
+        .menu{
+            margin:0px auto 300px auto;
+            width:100%;
+            position:relative;
+          
             .drinksCatelog{
-                padding:20px 0 20px 0;
-                margin:0 auto;
+                padding:5px 0 20px 0;
+                margin:100px auto;
                 >div{
                     display:inline-block;
                     width:30%;
-                    padding:2px  5px 10px 5px;
+                    padding:10px 0px;
                     border:.5px solid white ;
+                    background: rgba(248, 248, 248,0.8);
                     border-radius:10px;
-                    margin:25px 1%;
+                    margin:10px 1%;
                     min-height:300px;
                     box-shadow:.5px 1px 3px grey;
                     position:relative;
@@ -102,32 +146,42 @@ $primaryColor:#dbc3a3;
                         width:45%;
                         margin:25px 2%;
                     }
-                    >div{
+                    >.forImg{//放圖片的區域
                         text-align:center;
+                         overflow:hidden;
                         img{
-                            width:50%;
-                            height:200px;
+                            max-width:100%;
+                            height:160px;
                             margin-top:0px;
+                            cursor:pointer;
+                        }
+                        img:hover{
+                            transition:ease 1.5s;
+                            transform:scale(1.2);
                         }
                     }
-                    
                     h5{
                         margin:5px auto;
-                    }
-                    .tag{}
-                    .selection{
-                        /*background:yellow;*/
                         
+                    }
+                    .tag{
+                        width:100%;
+                        padding:0;
+                       
+                    }
+                    .selection{
+                     /* background:yellow;*/
+                       padding-left:20%;
+                 
                         label{
                             margin-top:5px;
                             text-align:left;
-                            
                         }
                         select{
                             border:none;
                             border-radius:2px;
                             background:#ece0cf;
-                            width:60px;
+                            width:20%;
                             height:30px;
                             margin:5px 5px 0 0;
                         }
@@ -136,21 +190,21 @@ $primaryColor:#dbc3a3;
                         }
                     }
                 }
+                
                 button{
                     margin-top:10px;
-                    margin-left:30px;
+                    margin-left:15%;
                     width:50%;
                     height:40px;
                     background:$primaryColor;
                    color:white;
                     border:none;
+                  
                     &:hover{
                         background:#ffb01f;
                         font-weight:bold;
-                        
                     }
                 }
-               
             }
             .drinksMenu{/*table*/
                 width:90%;
@@ -178,6 +232,18 @@ $primaryColor:#dbc3a3;
                
             }
         }
+    
+        // .menu::before{
+        //     content:'';/*這個屬性一定要存在*/
+        //     position:absolute;
+        //     top:-10px;
+        //     left:0;
+        //     width:100%;
+        //     height:200px;
+        //     background:linear-gradient(to top, transparent,hsla(345, 100%, 75%, 1));
+        //     z-index:1000;
+        // }
+
         
         input[type="checkbox"]{/*中括號可以指定屬性喔*/
             width:50px;
@@ -192,7 +258,7 @@ $primaryColor:#dbc3a3;
             height:auto;
             margin:100px auto;
             position:relative;
-           table{
+           .cartTable{
                width:70%;
                height:60px;
                 margin:0 auto;
@@ -213,7 +279,7 @@ $primaryColor:#dbc3a3;
                     text-align:center;
                     vertical-align:middle;
                     border-bottom:.5px solid $primaryColor;
-                   input[type="button"]{/*刪除按鈕X*/
+                  .delBtn{/*刪除按鈕X  input[type="button"],*/
                        background:transparent;
                        border:none;
                        color:red;
@@ -222,6 +288,9 @@ $primaryColor:#dbc3a3;
                             font-weight:bold;
                             background:orange;
                         }
+                   }
+                   .delBtn:hover td{
+                      background-color:red;
                    }
                     span{
                         border-radius:50%;
@@ -242,7 +311,33 @@ $primaryColor:#dbc3a3;
                bottom:-100px;
                left:40%;
            }
+         
+          
+
         }
+
+        .btModal{
+            position:fixed;
+            top:20px;
+            right:20px;
+            z-index:999;
+           
+        }
+        #exampleModal{
+            
+        }
+
+        /*在modal中的購物車*/
+        .cartTable{
+           tr:hover {
+                background-color:$primaryColor;
+            }
+            td{
+                padding-top:10px;
+            }
+        }
+
+
     }
     
   
