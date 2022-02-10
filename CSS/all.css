@@ -297,7 +297,7 @@ table {
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 999; }
+    z-index: 10000; }
   #app .cartTable tr:hover {
     background-color: #dbc3a3; }
   #app .cartTable td {
