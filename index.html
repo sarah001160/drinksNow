@@ -46,47 +46,6 @@
         <div class="menu">
            <h2 class="h2 mt-3 horiz-c">Menu</h2>
             <div class="drinksCatelog">
-                <!-- <div> -測試--
-                    <div><img src="thumb2.png"></div>
-                    <div class="tag">中杯$45 <br>大杯$55</div>
-                    <h5 class="h5 f-bold horiz-c">混珠奶茶</h5>
-                    <div>
-                        <label for="size">容量</label>
-                        <select name="" id="size">
-                            <option value=""></option>
-                            <option value="中杯">中杯</option>
-                            <option value="大杯">大杯</option>
-                        </select>
-                        <label for="sugar">糖度</label>
-                        <select name="" id="sugar">
-                            <option value=""></option>
-                            <option value="無糖">無糖</option>
-                            <option value="微糖">微糖</option>
-                            <option value="半糖">半糖</option>
-                            <option value="全糖">全糖</option>
-                        </select>
-                        <br>
-                        <label for="icecube">冰塊</label>
-                        <select name="" id="icecube">
-                            <option value=""></option>
-                            <option value="去冰">去冰</option>
-                            <option value="微冰">微冰</option>
-                            <option value="少冰">少冰</option>
-                            <option value="正常冰">正常冰</option>
-                        </select>
-                        <label for="addsnack">加料</label>
-                        <select name="" id="addsnack">
-                            <option value=""></option>
-                            <option value="小珍珠">小珍珠</option>
-                            <option value="芋圓">芋圓</option>
-                            <option value="蒟蒻">蒟蒻</option>
-                            <option value="大珍珠">大珍珠</option>
-                        </select>
-                        <button>加入購物車</button>
-                    </div>
-                </div> -->
-              
-
                 <div v-for="(item,key) in List" :key="item">
                     <div class="forImg"><img :src="item.img"></div>
                     <h5 class="h5 f-bold horiz-c">{{item.name}}</h5>
@@ -139,93 +98,9 @@
                     </div>
                 </div>
             </div>
-            <!-- <table class="drinksMenu">
-                <tr>
-                    <th class="f-bold verti-c"></th>
-                    <th class="f-bold verti-c">品項</th>
-                    <th class="f-bold verti-c">M</th>
-                    <th class="f-bold verti-c">L</th>
-                    <th class="f-bold verti-c">容量</th>
-                    <th class="f-bold verti-c">甜度</th>
-                    <th class="f-bold verti-c">冰塊</th>
-                    <th style="width:200px">數量</th>
-                    <th class="f-bold verti-c">價錢</th>
-                    <th class="f-bold verti-c">訂購</th>
-                </tr>
-                <tr v-for="(item,key) in List" :key=item>
-                    <td><input type="button"  value="訂購" @click="Addtocart(item)"></td>
-                    <td :class="{'bgred':item.check===true}">{{item.name}}</td>
-                    <td>{{item.Mprice}}</td>
-                    <td>{{item.Lprice}}</td>
-                    <td>
-                        <select name="" id="" @change="selection(item)" v-model="item.size">
-                            <option value=""> </option>
-                            <option value="M">中杯</option>
-                            <option value="L">大杯</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="" id="" v-model="item.sugar">
-                            <option value=""> </option>
-                            <option value="半糖">半糖</option>
-                            <option value="全糖">全糖</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="" id="" v-model="item.ice">
-                            <option value=""></option>
-                            <option value="去冰">去冰</option>
-                            <option value="少冰">少冰</option>
-                        </select>
-                    </td>
-                    <td>{{item.number}}</td>
-                    <td>{{item.price}}</td>
-                </tr>
-               
-            </table>  -->
+           
         </div>
-        <div class="cartArea">
-            <!-- 顯示購物車
-            <ul v-for="(item,key) in showsList">
-                <li><button @click="removeFromcart(item)">刪除</button></li>
-                <li>飲料:{{item.title}}</li>
-                <li>價錢:{{item.price}}</li>
-                <li>甜度:{{item.sugar}}</li>
-                <li>數量{{item.num}}</li>
-            </ul> -->
-            <!-- <h2 class="h2 horiz-c">已加入購物車</h2> -->
-            <!-- <table>
-                <tr style="background:#ffe75c;">
-                    <th style="width:3%;"></th>
-                    <th class="f-bold verti-c horiz-c" style="width:3%;"></th>
-                    <th class="f-bold verti-c horiz-c" style="width:19%;">飲料</th>
-                    <th class="f-bold verti-c horiz-c" style="width:10%;">價錢</th>
-                    <th class="f-bold verti-c horiz-c" style="width:10%;">容量</th>
-                    <th class="f-bold verti-c horiz-c" style="width:10%;">甜度</th>
-                    <th class="f-bold verti-c horiz-c" style="width:10%;">冰塊</th>
-                    <th class="f-bold verti-c horiz-c" style="width:10%;">加料</th>
-                    <th class="f-bold verti-c horiz-c" style="width:10%;">數量</th>
-                    <th class="f-bold verti-c horiz-c" style="width:10%;">品項金額</th>
-                </tr>
-                <tr v-for="(item,key) in showsList">
-                    <td> <input type="button" class="butt" value="X" @click="removeFromcart(item)"></input>
-                    <td><span>{{key +1}}</span></td>
-                    <td>{{item.title}}</td>
-                    <td>${{item.price}}</td>
-                    <td>{{item.size}}</td>
-                    <td>{{item.sugar}}</td>
-                    <td>{{item.ice}}</td>
-                    <td>{{item.snack}}</td>
-                    <td>{{item.num}}杯</td>
-                    <td data-price>{{item.eachRevenue}}元</td>
-                </tr>
-            </table> -->
-        
-         
-          
-
-
-        </div>
+        <div class="cartArea">      </div>
         <div class="horiz-c ml-3 mt-3">
             <h2 class="h2">金額總計:{{Toatlexpense}}元</h2>
         </div>
@@ -262,16 +137,16 @@
                 <th class="f-bold verti-c horiz-c" style="width:10%;">小計</th>
             </tr>
             <tr v-for="(item,key) in showsList">
-                <td > <input type="button" class="delBtn butt btn-danger" value="X" @click="removeFromcart(item)"></input>
-                <td><span>{{key +1}}</span></td>
-                <td class="verti-c horiz-c" style="width:10%;">{{item.title}}</td>
-                <td class="verti-c horiz-c" style="width:10%;">${{item.price}}</td>
-                <td class="verti-c horiz-c" style="width:10%;">{{item.size}}</td>
-                <td class="verti-c horiz-c" style="width:10%;">{{item.sugar}}</td>
-                <td class="verti-c horiz-c" style="width:10%;">{{item.ice}}</td>
-                <td class="verti-c horiz-c" style="width:10%;">{{item.snack}}</td>
-                <td class="verti-c horiz-c" style="width:10%;">{{item.num}}杯</td>
-                <td data-price  class="verti-c horiz-c" style="width:10%;">{{item.eachRevenue}}元</td>
+                <td width="1%"><input type="button" class="delBtn butt btn-danger" value="X" @click="removeFromcart(item)"></input>
+                <td width="1%"><span>{{key +1}}</span></td>
+                <td class="verti-c horiz-c" width="12%">{{item.title}}</td>
+                <td class="verti-c horiz-c" width="12%">${{item.price}}</td>
+                <td class="verti-c horiz-c" width="10%" >{{item.size}}</td>
+                <td class="verti-c horiz-c" width="10%">{{item.sugar}}</td>
+                <td class="verti-c horiz-c" width="10%">{{item.ice}}</td>
+                <td class="verti-c horiz-c" width="10%">{{item.snack}}</td>
+                <td class="verti-c horiz-c" width="10%">{{item.num}}杯</td>
+                <td data-price  class="verti-c horiz-c" width="10%">{{item.eachRevenue}}元</td>
             </tr>
         </table>
 
@@ -279,6 +154,10 @@
           <!----//end--->     
         </div>
         <div class="modal-footer">
+            <div class="horiz-c ml-3 mt-3">
+                <h2 class="h2">金額總計:{{Toatlexpense}}元</h2>
+            </div>
+         </div>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="hideModal()">Close</button>
           
         </div>

@@ -46,7 +46,7 @@ $primaryColor:#dbc3a3;
         font-family:Arial;
         
         .header{
-            margin:0px 0 100px 0;
+            margin:0px 0 100px 0;/*上右下左*/
             padding-top:10px;
             width:100%;
             height:50px;
@@ -56,18 +56,16 @@ $primaryColor:#dbc3a3;
             left:0;
             z-index:1000;
            @include mobile{
-              //手機板設定
+              /*手機板設定*/
               
            }
            @include tablet{
-               //header平板設定
+               /*header平板設定*/
            }
             h2{
-                
                 img{
                     width:9%;
                     overflow:hidden;
-
                     @include mobile{
                         width:30%;
                     }
@@ -233,16 +231,7 @@ $primaryColor:#dbc3a3;
             }
         }
     
-        // .menu::before{
-        //     content:'';/*這個屬性一定要存在*/
-        //     position:absolute;
-        //     top:-10px;
-        //     left:0;
-        //     width:100%;
-        //     height:200px;
-        //     background:linear-gradient(to top, transparent,hsla(345, 100%, 75%, 1));
-        //     z-index:1000;
-        // }
+         
 
         
         input[type="checkbox"]{/*中括號可以指定屬性喔*/
@@ -258,24 +247,35 @@ $primaryColor:#dbc3a3;
             height:auto;
             margin:100px auto;
             position:relative;
-           .cartTable{
-               width:70%;
-               height:60px;
+          
+          
+
+        }
+
+        .btModal{
+            position:fixed;
+            top:20px;
+            right:20px;
+            z-index:9999;
+           
+        }
+        #exampleModal{
+            .cartTable{
+               width:100%;
                 margin:0 auto;
                 background:white;
-                height:50px;
                 border:1px solid $primaryColor;
                 @include tablet{
-                    width:90%;
+                    width:100%;
                 }
                 @include mobile{
-                    width:90%;
+                    width:100%;
                 }
                 th{
-                    height:60px;
+                    height:50px;
                 }
                 td{
-                    height:60px;
+                    height:50px;
                     text-align:center;
                     vertical-align:middle;
                     border-bottom:.5px solid $primaryColor;
@@ -310,32 +310,13 @@ $primaryColor:#dbc3a3;
                position:absolute;
                bottom:-100px;
                left:40%;
+               background:orange;
            }
          
-          
-
         }
 
-        .btModal{
-            position:fixed;
-            top:20px;
-            right:20px;
-            z-index:999;
-           
-        }
-        #exampleModal{
-            
-        }
-
-        /*在modal中的購物車*/
-        .cartTable{
-           tr:hover {
-                background-color:$primaryColor;
-            }
-            td{
-                padding-top:10px;
-            }
-        }
+        
+        
 
 
     }

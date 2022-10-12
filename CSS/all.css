@@ -72,10 +72,10 @@ table {
 #app {
   width: 100%;
   height: auto;
-  font-family: Arial;
-  /*在modal中的購物車*/ }
+  font-family: Arial; }
   #app .header {
     margin: 0px 0 100px 0;
+    /*上右下左*/
     padding-top: 10px;
     width: 100%;
     height: 50px;
@@ -84,6 +84,12 @@ table {
     top: 0;
     left: 0;
     z-index: 1000; }
+    @media (max-width: 576px) {
+      #app .header {
+        /*手機板設定*/ } }
+    @media (min-width: 576.1px) and (max-width: 853px) {
+      #app .header {
+        /*header平板設定*/ } }
     #app .header h2 img {
       width: 9%;
       overflow: hidden; }
@@ -247,58 +253,53 @@ table {
     height: auto;
     margin: 100px auto;
     position: relative; }
-    #app .cartArea .cartTable {
-      width: 70%;
-      height: 60px;
-      margin: 0 auto;
-      background: white;
-      height: 50px;
-      border: 1px solid #dbc3a3; }
-      @media (min-width: 576.1px) and (max-width: 853px) {
-        #app .cartArea .cartTable {
-          width: 90%; } }
-      @media (max-width: 576px) {
-        #app .cartArea .cartTable {
-          width: 90%; } }
-      #app .cartArea .cartTable th {
-        height: 60px; }
-      #app .cartArea .cartTable td {
-        height: 60px;
-        text-align: center;
-        vertical-align: middle;
-        border-bottom: 0.5px solid #dbc3a3; }
-        #app .cartArea .cartTable td .delBtn {
-          /*刪除按鈕X  input[type="button"],*/
-          background: transparent;
-          border: none;
-          color: red;
-          width: 20px; }
-          #app .cartArea .cartTable td .delBtn:hover {
-            font-weight: bold;
-            background: orange; }
-        #app .cartArea .cartTable td .delBtn:hover td {
-          background-color: red; }
-        #app .cartArea .cartTable td span {
-          border-radius: 50%;
-          display: block;
-          width: 20px;
-          height: 20px;
-          color: white;
-          background: #dbc3a3;
-          margin-left: 0px; }
-    #app .cartArea button {
-      /*結帳按鈕*/
-      width: 200px;
-      margin-top: 100px;
-      position: absolute;
-      bottom: -100px;
-      left: 40%; }
   #app .btModal {
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 999; }
-  #app .cartTable tr:hover {
-    background-color: #dbc3a3; }
-  #app .cartTable td {
-    padding-top: 10px; }
+    z-index: 9999; }
+  #app #exampleModal .cartTable {
+    width: 100%;
+    margin: 0 auto;
+    background: white;
+    border: 1px solid #dbc3a3; }
+    @media (min-width: 576.1px) and (max-width: 853px) {
+      #app #exampleModal .cartTable {
+        width: 100%; } }
+    @media (max-width: 576px) {
+      #app #exampleModal .cartTable {
+        width: 100%; } }
+    #app #exampleModal .cartTable th {
+      height: 50px; }
+    #app #exampleModal .cartTable td {
+      height: 50px;
+      text-align: center;
+      vertical-align: middle;
+      border-bottom: 0.5px solid #dbc3a3; }
+      #app #exampleModal .cartTable td .delBtn {
+        /*刪除按鈕X  input[type="button"],*/
+        background: transparent;
+        border: none;
+        color: red;
+        width: 20px; }
+        #app #exampleModal .cartTable td .delBtn:hover {
+          font-weight: bold;
+          background: orange; }
+      #app #exampleModal .cartTable td .delBtn:hover td {
+        background-color: red; }
+      #app #exampleModal .cartTable td span {
+        border-radius: 50%;
+        display: block;
+        width: 20px;
+        height: 20px;
+        color: white;
+        background: #dbc3a3;
+        margin-left: 0px; }
+  #app #exampleModal button {
+    /*結帳按鈕*/
+    width: 200px;
+    margin-top: 100px;
+    position: absolute;
+    bottom: -100px;
+    left: 40%;
+    background: orange; }
